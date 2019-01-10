@@ -1,0 +1,35 @@
+body {
+	background: transparent;
+	direction: rtl
+}
+
+#contactForm input {
+	color: #7F1416;
+}
+
+#contactForm .page-header {
+	font-family: opensanshebrew-light;
+	font-weight: 400;
+	color: #7F1416;
+	font-size: 60px;
+	line-height: 60px;
+	letter-spacing: -1px;
+	font-style: Normal;
+	text-transform: uppercase;
+	text-decoration: none;
+	border-bottom: none;
+}
+
+#contactForm .text-danger{
+	min-height:20px;
+}
+
+@media (min-width: 992px) {
+	.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+		float: right;
+	}
+}
+
+#submit.btn{
+	border: #7F1416 1 solid;
+}
