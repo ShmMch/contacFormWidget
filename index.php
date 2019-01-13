@@ -5,7 +5,7 @@ if (isset($_POST["submit"])) {
     $phone = $_POST['phone'];
     $message = $_POST['message'];
     $from = 'ספיין פילאטיס';
-    $to = 'spinepilates@gmail.com';
+    $to = "shmmch@gmail.com";//'spinepilates@gmail.com';
     $subject = 'מייל חדש מהאתר ';
 
     $body = "From: $name\n E-Mail: $email\n Phone:\n $phone Message:\n $message";
