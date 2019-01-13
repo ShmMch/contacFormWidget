@@ -58,7 +58,7 @@ if (isset($_POST["submit"])) {
 		// Read page rendered as result of your POST request
         $result = file_get_contents($url,false,$context);
 		// Server response is now stored in $result variable so you can process it
-		echo ($result);
+		// echo ($result);
     }
 }
 ?>
