@@ -55,3 +55,24 @@ body {
 	width: 120px;
 	font-size: 20px;
 }
+
+.sucsses{
+	width: 100%;
+    font-weight: 400;
+	font-style: Normal;
+	text-align: center
+}
+.sucsses h2{
+	font-family: opensanshebrew-light;
+    color: #7f1416;
+    font-size: 50px;
+    letter-spacing: -1px;
+}
+
+.sucsses p{
+	font-family: opensanshebrew-regular;
+    color: #282828;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0;
+}

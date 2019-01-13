@@ -33,10 +33,10 @@ if (isset($_POST["submit"])) {
 // If there are no errors, send the email
     if (!$errName && !$errEmail && !$errPhone && !$errMessage) {
         if (mail($to, $subject, $body)) {
-            $result = '<div><h2 class="Title">תודה רבה!</h2><p class="Normal-white ospfxwdc501ae0ff8c19f1a21b3e204b48823dossfx">נחזור אליכם בהקדם.</p></div>';
+            $result = '<div class="sucsses"><h2>תודה רבה!</h2><p>נחזור אליכם בהקדם.</p></div>';
         } else {
             $result = '<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later.</div>';
-            $result = '<div><h2 class="Title">תודה רבה!</h2><p class="Normal-white">נחזור אליכם בהקדם.</p></div>';
+            $result = '<div class="sucsses"><h2>תודה רבה!</h2><p>נחזור אליכם בהקדם.</p></div>';
         }
         //send to Arbox
         $url = "http://staging.arboxapp.com/manage/current/public/"; //"https://api.arboxapp.com/index.php";
@@ -56,7 +56,7 @@ if (isset($_POST["submit"])) {
 		// Create context resource for our request
 		$context = stream_context_create(array('http' => $contextData));
 		// Read page rendered as result of your POST request
-        $result = file_get_contents($url,false,$context);
+        $res = file_get_contents($url,false,$context);
 		// Server response is now stored in $result variable so you can process it
 		// echo ($result);
     }
