@@ -5,7 +5,7 @@ if (isset($_POST["submit"])) {
     $phone = $_POST['phone'];
     $message = $_POST['message'];
     $from = 'ספיין פילאטיס';
-    $to = 'shmmch@gmail.com'; //'spinepilates@gmail.com';
+    $to = 'spinepilates@gmail.com';
     $subject = 'מייל חדש מהאתר ';
 
     $body = "From: $name\n E-Mail: $email\n Phone:\n $phone Message:\n $message";
@@ -36,8 +36,29 @@ if (isset($_POST["submit"])) {
             $result = '<div><h2 class="Title">תודה רבה!</h2><p class="Normal-white ospfxwdc501ae0ff8c19f1a21b3e204b48823dossfx">נחזור אליכם בהקדם.</p></div>';
         } else {
             $result = '<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later.</div>';
-			$result = '<div><h2 class="Title">תודה רבה!</h2><p class="Normal-white">נחזור אליכם בהקדם.</p></div>';
-		}
+            $result = '<div><h2 class="Title">תודה רבה!</h2><p class="Normal-white">נחזור אליכם בהקדם.</p></div>';
+        }
+        //send to Arbox
+        $url = "http://staging.arboxapp.com/manage/current/public/"; //"https://api.arboxapp.com/index.php";
+        $path = "api/v2/leads";
+        $location_box_fk = "";
+        $source_fk = 1592;
+		$params = array('first_name' => $name, 'phone' => $phone, 
+		'email' => $email, 'location_box_fk' => $location_box_fk, 'source_fk' => $source_fk);
+		$query = http_build_query($params);
+		// Create Http context details
+        $contextData = array(
+			'method' => 'POST',
+            'header' => "Connection: close\r\n" .
+			"Content-Length: " . strlen($query) . "\r\n".
+			"apiKey: " . $apiKey . "\r\n",
+			'content' => $query);
+		// Create context resource for our request
+		$context = stream_context_create(array('http' => $contextData));
+		// Read page rendered as result of your POST request
+        $result = file_get_contents($url,false,$context);
+		// Server response is now stored in $result variable so you can process it
+		echo ($result);
     }
 }
 ?>
@@ -56,7 +77,7 @@ if (isset($_POST["submit"])) {
   <body id="contactForm">
   	<div class="container">
   		<div class="row">
-  			<div class="col-md-6 col-md-offset-3">
+  			<div class="col-md-9 col-md-offset-3">
   				<h1 class="page-header text-center">צרו קשר</h1>
 				<form class="form-horizontal" role="form" method="post" action="index.php">
 				<?php if (!isset($result)) {?>
@@ -88,10 +109,12 @@ if (isset($_POST["submit"])) {
 						</div>
 					</div>
 				</div>
-					<div class="form-group">
-						<div class="col-sm-10 col-sm-offset-2">
-							<input id="submit" name="submit" type="submit" value="Send" class="btn">
+				<div class="col-md-12" style="text-align:center;">
+					<div class="form-group" >
+						<div >
+							<input id="submit" name="submit" type="submit" value="שלח" class="btn">
 						</div>
+					</div>
 					</div>
 					<?php }?>
 					<div class="form-group">
