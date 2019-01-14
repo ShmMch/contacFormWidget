@@ -5,7 +5,7 @@ if (isset($_POST["submit"])) {
     $phone = $_POST['phone'];
     $message = $_POST['message'];
     $from = 'ספיין פילאטיס';
-    $to = "shmmch@gmail.com";//'spinepilates@gmail.com';
+    $to = "shmmch@gmail.com"; //'spinepilates@gmail.com';
     $subject = 'מייל חדש מהאתר ';
 
     $body = "From: $name\n E-Mail: $email\n Phone:\n $phone Message:\n $message";
@@ -39,26 +39,26 @@ if (isset($_POST["submit"])) {
             $result = '<div class="sucsses"><h2>תודה רבה!</h2><p>נחזור אליכם בהקדם.</p></div>';
         }
         //send to Arbox
-        $url = "http://staging.arboxapp.com/manage/current/public/"; //"https://api.arboxapp.com/index.php";
-        $path = "api/v2/leads";
-        $location_box_fk = "";
+        $apiKey = 'c8677a47-e788-4309-884b-f8389dd7dcb1';
+        $url = "http://staging.arboxapp.com/manage/current/public/api/v2/leads"; //"http://api.arboxapp.com/index.php/api/v2/leads";
+        $location_box_fk = 371;
         $source_fk = 1592;
-		$params = array('first_name' => $name, 'phone' => $phone, 
-		'email' => $email, 'location_box_fk' => $location_box_fk, 'source_fk' => $source_fk);
-		$query = http_build_query($params);
-		// Create Http context details
+        $params = array('first_name' => $name, 'phone' => $phone,
+            'email' => $email, 'location_box_fk' => $location_box_fk, 'source_fk' => $source_fk);
+        $query = http_build_query($params);
+        // Create Http context details
         $contextData = array(
-			'method' => 'POST',
+            'method' => 'POST',
             'header' => "Connection: close\r\n" .
-			"Content-Length: " . strlen($query) . "\r\n".
-			"apiKey: " . $apiKey . "\r\n",
-			'content' => $query);
-		// Create context resource for our request
-		$context = stream_context_create(array('http' => $contextData));
-		// Read page rendered as result of your POST request
-        $res = file_get_contents($url,false,$context);
-		// Server response is now stored in $result variable so you can process it
-		// echo ($result);
+            "Content-Length: " . strlen($query) . "\r\n" .
+            "apiKey: " . $apiKey . "\r\n",
+            'content' => $query);
+        // Create context resource for our request
+        $context = stream_context_create(array('http' => $contextData));
+        // Read page rendered as result of your POST request
+        $res = file_get_contents($url, false, $context);
+        // Server response is now stored in $result variable so you can process it
+        // echo ($result);
     }
 }
 ?>
@@ -104,7 +104,7 @@ if (isset($_POST["submit"])) {
 					<div class="col-md-6">
 						<div class="form-group">
 						<div class="col-sm-10">
-							<textarea class="form-control" rows="7" name="message"><?php echo htmlspecialchars($_POST['message']); ?></textarea>
+							<textarea class="form-control" rows="7" name="message" placeholder="הודעה"><?php echo htmlspecialchars($_POST['message']); ?></textarea>
 							<?php echo "<p class='text-danger'>$errMessage </p>"; ?>
 						</div>
 					</div>
