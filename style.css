@@ -1,78 +1,237 @@
+@import url(https://fonts.googleapis.com/earlyaccess/opensanshebrew.css);
+@import url(https://fonts.googleapis.com/earlyaccess/opensanshebrewcondensed.css);
+
 body {
-	background: transparent;
-	direction: rtl
-}
-
-#contactForm input {
-	color: #7F1416;
-}
-
-#contactForm .page-header {
-	font-family: opensanshebrew-light;
-	font-weight: 400;
-	color: #7F1416;
-	font-size: 60px;
-	line-height: 60px;
-	letter-spacing: -1px;
-	font-style: Normal;
-	text-transform: uppercase;
-	text-decoration: none;
-	border-bottom: none;
-}
-
-#contactForm .form-control {
-	background: white;
-	border: none;
-	box-shadow: none;
-	border-radius: 0;
-	height: 44px;
-}
-#contactForm textarea.form-control{
-	height: 100%;
-}
-
-#contactForm .text-danger {
-	position: absolute;
-	top: 0;
-	left: 20px;
-	color: #c3bac4;
-	font-family: Alef Hebrew;
-	font-size: 16px;
-}
-
-@media (min-width: 992px) {
-	.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
-		float: right;
-	}
-}
-
-#contactForm #submit {
-	border: #7F1416 solid 1px;
-	border-radius: 0;
-	background: transparent;
-	margin:5px;
-	height: 45px;
-	width: 120px;
-	font-size: 20px;
-}
-
-.sucsses{
-	width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    font-family: 'Open Sans Hebrew', serif;
     font-weight: 400;
-	font-style: Normal;
-	text-align: center
+    padding-top: 100px;
+    overflow: hidden;
+    background: beige;
+    direction: rtl;
 }
-.sucsses h2{
-	font-family: opensanshebrew-light;
+
+div{
+    position: relative;
+}
+
+#name,
+#email,
+#phone,
+textarea {
+    margin: 10px;
+    font-size: 14px;
+    color: #7F1416;
+    border: none;
+}
+
+.error::before {
+    content: "שדה חובה";
+    position: absolute;
+    color: #c3bac4;
+    font-family: Alef Hebrew;
+    font-size: 16px;
+    top:15px;
+}
+
+#submit {
+    border: #7F1416 solid 1px;
+    border-radius: 0;
+    background: transparent;
+    margin: 5px;
+    height: 45px;
+    width: 120px;
+    font-size: 20px;
+    color: #7F1416;
+}
+
+.sucsses {
+    font-weight: 400;
+    width: 100%;
+    font-style: Normal;
+    text-align: center
+}
+
+.success h2 {
     color: #7f1416;
     font-size: 50px;
     letter-spacing: -1px;
 }
 
-.sucsses p{
-	font-family: opensanshebrew-regular;
+.success p {
     color: #282828;
     font-size: 16px;
     line-height: 22px;
     letter-spacing: 0;
 }
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    box-shadow: 0 0 0 30px white inset !important;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: #7F1416 !important;
+}
+
+/* #region flexibility*/
+@media (min-width: 480px) {
+
+    #message,
+    #personalDetails {
+        width: 50%;
+        margin: 0;
+        float: right;
+    }
+
+    #message {
+        text-align: right;
+    }
+
+    #personalDetails {
+        text-align: left;
+    }
+
+    #name,
+    #email,
+    #phone,
+    textarea {
+        width: 327px;
+        padding-right: 12px;
+    }
+
+    #name,
+    #email,
+    #phone {
+        height: 47px;
+        margin-left: 20px !important;
+    }
+
+    textarea {
+        margin-right: 20px !important;
+        height: 185px;
+    }
+
+    .error::before {
+        left:25px;
+    }
+    #message.error::before {
+        right:300px;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 770px) {
+
+    #name,
+    #email,
+    #phone,
+    textarea {
+        width: 190px;
+    }
+
+    #name,
+    #email,
+    #phone {
+        height: 32px;
+        margin-left: 20px !important;
+    }
+
+    textarea {
+        margin-right: 20px !important;
+        height: 135px;
+    }
+
+    #message.error::before {
+        right:165px;
+    }
+    
+}
+
+@media (max-width: 480px) {
+
+    #name,
+    #email,
+    #phone,
+    textarea {
+        width: 190px;
+    }
+
+    #name,
+    #email,
+    #phone {
+        height: 25px;
+    }
+
+    textarea {
+        height: 115px;
+    }
+
+    .error::before {
+        left:30%;
+    }
+}
+
+/* #endregion */
+
+/* #region placeholders color */
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #7F1416;
+    font-size: 14px;
+    font-family: 'Open Sans Hebrew', serif;
+    /* Firefox */
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #7F1416;
+    font-size: 14px;
+    font-family: 'Open Sans Hebrew', serif;
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #7F1416;
+    font-size: 14px;
+    font-family: 'Open Sans Hebrew', serif;
+}
+
+textarea::-webkit-input-placeholder {
+    color: #7F1416;
+    font-size: 14px;
+    font-family: 'Open Sans Hebrew', serif;
+}
+
+textarea:-moz-placeholder {
+    /* Firefox 18- */
+    color: #7F1416;
+    font-size: 14px;
+    font-family: 'Open Sans Hebrew', serif;
+}
+
+textarea::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #7F1416;
+    font-size: 14px;
+    font-family: 'Open Sans Hebrew', serif;
+}
+
+textarea:-ms-input-placeholder {
+    color: #7F1416;
+    font-size: 14px;
+    font-family: 'Open Sans Hebrew', serif;
+}
+
+textarea::placeholder {
+    color: #7F1416;
+    font-size: 14px;
+    font-family: 'Open Sans Hebrew', serif;
+}
+
+/* #endregion */
