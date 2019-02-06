@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#form").submit(function () {
             $.ajax({
                 type: "POST",
-                url: "email.php",
+                url: "https://kidumplus.top/spinepilatescoil/index.php",
                 data: {
                     name: $("#name").val(),
                     phone: $("#phone").val(),

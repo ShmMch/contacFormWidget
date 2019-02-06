@@ -12,15 +12,11 @@ $body = "From: $name\n <br>E-Mail: $email\n <br>Phone:\n $phone <br>Message:\n $
 $headers = "From:" . $from;
 $headers = 'MIME-Version: 1.0' . "\r\n";
 $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-if (mail($to, $subject, $body, $headers)) {
-    error_log('mail success');
-} else {
-    error_log('mail fail');
-}
-
+mail($to, $subject, $body, $headers); 
+ 
 //send to Arbox
 if($_ENV["ARBOX"]){
-$apiKey = "8a6b889a-c64e-4c72-bdb7-5d450929c3a2remove";
+$apiKey = "8a6b889a-c64e-4c72-bdb7-5d450929c3a2";
 $url = "http://api.arboxapp.com/index.php/api/v2/leads";
 $location_box_fk = 371;
 $source_fk = 1592;
@@ -35,8 +31,7 @@ $contextData = array(
     "content" => $query);
 $context = stream_context_create(array("http" => $contextData));
 $res = file_get_contents($url, false, $context);
-error_log($res);
+echo($res);
 }
-
 }
 ?>
