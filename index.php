@@ -1,4 +1,5 @@
 <?php
+$arbox=true;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // send the email
     $name = $_POST['name'];
@@ -15,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     mail($to, $subject, $body, $headers);
 
     //send to Arbox
+    if($arbox){
         $apiKey = "8a6b889a-c64e-4c72-bdb7-5d450929c3a2";
         $url = "http://api.arboxapp.com/index.php/api/v2/leads";
         $location_box_fk = 371;
@@ -32,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $context = stream_context_create(array("http" => $contextData));
         $res = file_get_contents($url, false, $context);
         echo ($res);
+    }
 }
 ?>
 
@@ -106,10 +109,11 @@ div{
 #phone,
 textarea {
     margin: 10px;
-    font-size: 14px;
     color: #7F1416;
     border: none;
-    font-family: 'Open Sans Hebrew', serif;
+    font-family: 'Arial', serif;
+    font-size:15px;
+    padding-right: 12px;
 }
 
 .error::before {
@@ -192,7 +196,6 @@ input:-webkit-autofill {
     #phone,
     textarea {
         width: 327px;
-        padding-right: 12px;
     }
 
     #name,
@@ -283,55 +286,55 @@ textarea {
 ::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #7F1416;
-    font-size: 14px;
-    font-family: 'Open Sans Hebrew', serif;
+    font-size: 15px;
+    font-family: 'Arial', serif;
     /* Firefox */
 }
 
 :-ms-input-placeholder {
     /* Internet Explorer 10-11 */
     color: #7F1416;
-    font-size: 14px;
-    font-family: 'Open Sans Hebrew', serif;
+    font-size: 15px;
+    font-family: 'Arial', serif;
 }
 
 ::-ms-input-placeholder {
     /* Microsoft Edge */
     color: #7F1416;
-    font-size: 14px;
-    font-family: 'Open Sans Hebrew', serif;
+    font-size: 15px;
+    font-family: 'Arial', serif;
 }
 
 textarea::-webkit-input-placeholder {
     color: #7F1416;
-    font-size: 14px;
-    font-family: 'Open Sans Hebrew', serif;
+    font-size: 15px;
+    font-family: 'Arial', serif;
 }
 
 textarea:-moz-placeholder {
     /* Firefox 18- */
     color: #7F1416;
-    font-size: 14px;
-    font-family: 'Open Sans Hebrew', serif;
+    font-size: 15px;
+    font-family: 'Arial', serif;
 }
 
 textarea::-moz-placeholder {
     /* Firefox 19+ */
     color: #7F1416;
-    font-size: 14px;
-    font-family: 'Open Sans Hebrew', serif;
+    font-size: 15px;
+    font-family: 'Arial', serif;
 }
 
 textarea:-ms-input-placeholder {
     color: #7F1416;
-    font-size: 14px;
-    font-family: 'Open Sans Hebrew', serif;
+    font-size: 15px;
+    font-family: 'Arial', serif;
 }
 
 textarea::placeholder {
     color: #7F1416;
-    font-size: 14px;
-    font-family: 'Open Sans Hebrew', serif;
+    font-size: 15px;
+    font-family: 'Arial', serif;
 }
 
 /* #endregion */
