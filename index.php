@@ -1,4 +1,5 @@
 <?php
+require_once "Mail.php";
 $arbox=true;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // send the email
@@ -6,24 +7,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $message = $_POST['message'];
-    $from = 'ספיין פילאטיס';
-    $to ='spinepilates@gmail.com';
-    $subject = 'מייל חדש מהאתר ';
-    $body = "From: $name\n <br>E-Mail: $email\n <br>Phone:\n $phone <br>Message:\n $message";
-    $headers = "From:" . $from;
-    $headers = 'MIME-Version: 1.0' . "\r\n";
-    $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-    mail($to, $subject, $body, $headers);
+    // Mail header
+    // $header = "Content-type: text/html; charset=".$encoding." \r\n";
+    // $header .= "Date: ".date("r (T)")." \r\n";
 
+    $from = "Test Sender <no-reply@design-editor.com>";
+    $to = "ספיין פילאטיס <spinepilates@gmail.com>";
+    $subject = "מייל חדש מהאתר";
+    $body = "שם מלא: $name\nמייל: $email\nטלפון:\n $phone הודעה:\n $message";
+ 
+    $host = "server1.kidumn.co.il";
+    $username = "smtp@lp.kidumn.co.il";
+    $password = "9oky7NCW";
+ 
+    $headers = array ('From' => $from,
+    'To' => $to,
+    'Subject' => $subject);
+    $smtp = Mail::factory('smtp',
+    array ('host' => $host,
+        'auth' => true,
+        'username' => $username,
+        'password' => $password));
+ 
+    $mail = $smtp->send($to, $headers, $body);
+ 
+    if (PEAR::isError($mail)) {
+    echo($mail->getMessage() );
+    } 
     //send to Arbox
-    if($arbox){
+    if($arbox==true){
         $apiKey = "8a6b889a-c64e-4c72-bdb7-5d450929c3a2";
         $url = "http://api.arboxapp.com/index.php/api/v2/leads";
         $location_box_fk = 371;
         $source_fk = 1592;
         $name = explode(" ", $name);
         $params = array("first_name" => $name[0],"last_name" => $name[1], "phone" => $phone,
-            "email" => $email, "location_box_fk" => $location_box_fk, "source_fk" => $source_fk);
+            "email" => $email, "comment" => $message,"location_box_fk" => $location_box_fk, "source_fk" => $source_fk);
         $query = http_build_query($params);
         $contextData = array(
             "method" => "POST",
@@ -50,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Contact Form</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function () {
     //Add validators
     document.querySelectorAll('input, textarea').forEach(function (element) {
         element.oninvalid = function (e) {
@@ -84,8 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     });
 })
 </script>
-<style>
-    @import url(https://fonts.googleapis.com/earlyaccess/opensanshebrew.css);
+    <style>
+        @import url(https://fonts.googleapis.com/earlyaccess/opensanshebrew.css);
 @import url(https://fonts.googleapis.com/earlyaccess/opensanshebrewcondensed.css);
 
 body {
@@ -265,7 +284,7 @@ input:-webkit-autofill {
     }
 
     .error::before {
-        left:15%;
+        left:18%;
     }
 }
 
@@ -344,14 +363,18 @@ textarea::placeholder {
 
 <body>
     <form id="form" role="form" method="post"">
-        <div id="personalDetails">
-            <div><input type="text" id="name" name="name" placeholder="שם מלא:" required></div>
-            <div><input type="email" id="email" name="email" placeholder="מייל:" required></div>
-            <div><input type="tel" id="phone" name="phone" placeholder="טלפון:" required></div>
+        <div id=" personalDetails">
+        <div><input type="text" id="name" name="name" placeholder="שם מלא:" required></div>
+        <div><input type="email" id="email" name="email" placeholder="מייל:" required></div>
+        <div><input type="tel" id="phone" name="phone" placeholder="טלפון:" required></div>
         </div>
         <div id="message"><textarea rows="6" name="message" placeholder="הודעה:" required></textarea></div>
         <input id="submit" name="submit" type="submit" value="שלח">
     </form>
-    <div class="success" style="display: none;"><h2>תודה רבה!</h2><p>נחזור אליכם בהקדם.</p></div>
+    <div class="success" style="display: none;">
+        <h2>תודה רבה!</h2>
+        <p>נחזור אליכם בהקדם.</p>
+    </div>
 </body>
+
 </html>
